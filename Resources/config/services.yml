@@ -1,0 +1,4 @@
+services:
+    Padam87\FormFilterBundle\Form\Extension\FilterExtension:
+        tags:
+            - { name: form.type_extension, extended_type: Symfony\Component\Form\Extension\Core\Type\FormType }

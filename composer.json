@@ -1,0 +1,29 @@
+{
+  "name": "padam87/form-filter-bundle",
+  "license": "MIT",
+  "description": "The simplest way to build search forms in Symfony. ",
+  "keywords": [
+    "symfony",
+    "search",
+    "form",
+    "filter"
+  ],
+  "authors": [
+    {
+      "name": "Adam Prager",
+      "email": "prager.adam87@gmail.com"
+    }
+  ],
+  "autoload": {
+    "psr-4": {"Padam87\\FormFilterBundle\\": ""}
+  },
+  "require": {
+    "php": "^7.0",
+    "symfony/config": "^3.4 || ^4.0",
+    "symfony/dependency-injection": "^3.4 || ^4.0",
+    "symfony/form": "^3.4 || ^4.0",
+    "doctrine/orm": "^2.3"
+  },
+  "suggest": {
+  }
+}
