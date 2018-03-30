@@ -1,26 +1,13 @@
 <?php
 
-namespace Padam87\FormFilterBundle\Repository;
+namespace Padam87\FormFilterBundle\Service;
 
 use Doctrine\ORM\QueryBuilder;
 use Symfony\Component\Form\FormInterface;
 
-trait Filterable
+class Filters
 {
-    abstract public function getRootAlias(): string;
-
-    public function createFilteredQueryBuilder(FormInterface $filters = null): QueryBuilder
-    {
-        $qb = $this->createQueryBuilder($this->getRootAlias());
-
-        if ($filters) {
-            $this->applyFilters($qb, $filters);
-        }
-
-        return $qb;
-    }
-
-    protected function applyFilters(QueryBuilder $qb, FormInterface $filters)
+    public function apply(QueryBuilder $qb, FormInterface $filters)
     {
         foreach ($filters->all() as $field => $filter) {
             if ($filter->isEmpty()) {
@@ -44,7 +31,7 @@ trait Filterable
                 }
 
                 $qb
-                    ->andWhere($qb->expr()->$expr("{$this->getRootAlias()}.$field", ":$field"))
+                    ->andWhere($qb->expr()->$expr("{$qb->getRootAliases()[0]}.$field", ":$field"))
                     ->setParameter($field, $value)
                 ;
             }

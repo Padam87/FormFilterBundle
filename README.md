@@ -47,25 +47,7 @@ class UserFilterType extends AbstractType
 }
 ```
 
-As you can see, the search fields are using the built in `TextType'.
-
-### Entity Repository
-
-Filters are applied in the repository, so the target entity repository need to implement an interface, and use a trait.
-
-```php
-class UserRepository extends EntityRepository implements FilterableRepositoryInterface
-{
-    use Filterable;
-    
-    public function getRootAlias(): string
-    {
-        return 'u';
-    }
-    
-    // ...
-}
-```
+As you can see, the search fields are using the built in `TextType`.
 
 ### Controller
 
@@ -73,7 +55,9 @@ class UserRepository extends EntityRepository implements FilterableRepositoryInt
 $filters = $this->createForm(UserFilterType::class);
 $filters->handleRequest($request);
 
-$qb = $em->getRepository(User::class)->createFilteredQueryBuilder($filters);
+$qb = $em->getRepository(User::class)->createQueryBuilder('alias');
+
+$this->get('padam87_form_filter.filters')->apply($qb, $filters);
 
 // paginate, render template etc.
 ```
