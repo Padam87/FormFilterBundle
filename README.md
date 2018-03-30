@@ -8,7 +8,7 @@ The simplest way to build search forms in Symfony.
 ## Usage
 
 My goal was to create a simpler, lighter way to build to search forms than what is currently available.
-No filter types, no learning curve, just a simple abstraction.
+No learning curve, just a simple abstraction. The bundle uses built-in form types, with some extra filter types for convenience.
 
 The bundle provides a form type extension, and makes 2 new options available for every type:
 - `filter` bool / callable, default: true
@@ -62,7 +62,7 @@ $this->get('padam87_form_filter.filters')->apply($qb, $filters);
 // paginate, render template etc.
 ```
 
-### Advanced usage
+## Advanced usage
 
 `filter_expr` - You can change the expression used in the filter, for example in the example above it would nice to use a `like` expression instead of `eq`.
 
@@ -105,3 +105,6 @@ If a simple expression is not enough, you can use a callback to customize the fi
 ```
 
 NOTE: You should not use joins here, write a custom method in the repository, eg `getListQb` and join everything you need to filter there.
+
+### Filter types
+- `BooleanFilterType` - 3 state filter for boolean values. (A simple checkbox would only have 2 states).
