@@ -37,7 +37,7 @@ class Filters
             }
 
             if (is_callable($callback)) {
-                $callback($qb, $this->getRootAlias(), $filter->getData());
+                $callback($qb, $qb->getRootAlias(), $filter->getData());
             }
         }
     }
