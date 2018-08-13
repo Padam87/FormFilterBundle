@@ -18,6 +18,12 @@ class FilterExtension extends AbstractTypeExtension
 
         $resolver->setDefault('filter_expr', 'eq');
         $resolver->setAllowedTypes('filter_expr', ['string']);
+
+        $resolver->setDefault('filter_alias', null);
+        $resolver->setAllowedTypes('filter_alias', ['null', 'string']);
+
+        $resolver->setDefault('filter_field', null);
+        $resolver->setAllowedTypes('filter_field', ['null', 'string']);
     }
 
     /**
