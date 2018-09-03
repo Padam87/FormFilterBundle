@@ -109,22 +109,22 @@ NOTE: You should not use joins here, write a custom method in the repository, eg
 ### Filter types
 - [BooleanFilterType](https://github.com/Padam87/FormFilterBundle/blob/master/Form/BooleanFilterType.php) - 3 state filter for boolean values. (A simple checkbox would only have 2 states).
 - [RangeFilterType](https://github.com/Padam87/FormFilterBundle/blob/master/Form/RangeFilterType.php) - A filter for ranges (numeric, date, any other)
-```
+```php
 $builder
-	->add(
-		'createdAt',
-		RangeFilterType::class,
-		[
-			'from_field_type' => DateType::class,
-			'from_field_options' => [
-				'widget' => 'single_text',
-			],
-			'to_field_type' => DateType::class,
-			'to_field_options' => [
-				'widget' => 'single_text',
-			],
+    ->add(
+        'createdAt',
+        RangeFilterType::class,
+        [
+            'from_field_type' => DateType::class,
+            'from_field_options' => [
+                'widget' => 'single_text',
+            ],
+            'to_field_type' => DateType::class,
+            'to_field_options' => [
+                'widget' => 'single_text',
+            ],
             'to_field_expr' => 'lt'
-		]
-	)
+        ]
+    )
 ;
 ```
