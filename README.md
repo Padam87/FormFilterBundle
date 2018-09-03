@@ -107,4 +107,24 @@ If a simple expression is not enough, you can use a callback to customize the fi
 NOTE: You should not use joins here, write a custom method in the repository, eg `getListQb` and join everything you need to filter there.
 
 ### Filter types
-- `BooleanFilterType` - 3 state filter for boolean values. (A simple checkbox would only have 2 states).
+- [BooleanFilterType](https://github.com/Padam87/FormFilterBundle/blob/master/Form/BooleanFilterType.php) - 3 state filter for boolean values. (A simple checkbox would only have 2 states).
+- [RangeFilterType](https://github.com/Padam87/FormFilterBundle/blob/master/Form/RangeFilterType.php) - A filter for ranges (numeric, date, any other)
+```
+$builder
+	->add(
+		'createdAt',
+		RangeFilterType::class,
+		[
+			'from_field_type' => DateType::class,
+			'from_field_options' => [
+				'widget' => 'single_text',
+			],
+			'to_field_type' => DateType::class,
+			'to_field_options' => [
+				'widget' => 'single_text',
+			],
+            'to_field_expr' => 'lt'
+		]
+	)
+;
+```
