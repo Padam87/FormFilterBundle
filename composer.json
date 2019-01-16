@@ -1,5 +1,6 @@
 {
   "name": "padam87/form-filter-bundle",
+  "type": "symfony-bundle",
   "license": "MIT",
   "description": "The simplest way to build search forms in Symfony. ",
   "keywords": [
