@@ -40,7 +40,7 @@ class Filters
                         $value = $filter->getData();
                 }
 
-                $param = $alias . '_' . $field;
+                $param = str_replace('.', '__', $alias) . '_' . $field;
 
                 $qb
                     ->andWhere($qb->expr()->$expr($alias . '.' . $field, ':' . $param))
