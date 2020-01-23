@@ -24,6 +24,9 @@ class FilterExtension extends AbstractTypeExtension
 
         $resolver->setDefault('filter_field', null);
         $resolver->setAllowedTypes('filter_field', ['null', 'string']);
+
+        $resolver->setDefault('filter_ignore_null', true);
+        $resolver->setAllowedTypes('filter_ignore_null', ['bool']);
     }
 
     /**

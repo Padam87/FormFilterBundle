@@ -10,7 +10,9 @@ class Filters
     public function apply(QueryBuilder $qb, FormInterface $filters)
     {
         foreach ($filters->all() as $name => $filter) {
-            if ($filter->isEmpty()) {
+            $ignoreNull = $filter->getConfig()->getOption('filter_ignore_null');
+
+            if ($ignoreNull && $filter->isEmpty()) {
                 continue;
             }
 
@@ -29,6 +31,10 @@ class Filters
 
             if ($callback === false) {
                 continue;
+            }
+
+            if ($filter->getData() === null && !$ignoreNull) {
+                $expr = 'isNull';
             }
 
             if ($callback === true) {
