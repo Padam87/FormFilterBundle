@@ -16,9 +16,8 @@ class Configuration implements ConfigurationInterface
      * {@inheritdoc}
      */
     public function getConfigTreeBuilder()
-    {
-        $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('padam87_form_filter');
+    {		
+        $treeBuilder = new TreeBuilder('padam87_form_filter');
 
         // Here you should define the parameters that are allowed to
         // configure your bundle. See the documentation linked above for
