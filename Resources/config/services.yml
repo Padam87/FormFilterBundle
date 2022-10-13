@@ -2,6 +2,9 @@ services:
     Padam87\FormFilterBundle\Form\Extension\FilterExtension:
         tags:
             - { name: form.type_extension, extended_type: Symfony\Component\Form\Extension\Core\Type\FormType }
+
+    Padam87\FormFilterBundle\Service\Filters: ~
+
     padam87_form_filter.filters:
-        class: Padam87\FormFilterBundle\Service\Filters
+        alias: Padam87\FormFilterBundle\Service\Filters
         public: true
