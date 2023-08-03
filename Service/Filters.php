@@ -7,9 +7,12 @@ use Symfony\Component\Form\FormInterface;
 
 class Filters
 {
-    public function apply(QueryBuilder $qb, FormInterface $filters)
+    public function apply(QueryBuilder $qb, FormInterface $filters, ?string $rootAlias = null)
     {
+        $rootAlias = $rootAlias ?? $qb->getRootAliases()[0];
+
         foreach ($filters->all() as $name => $filter) {
+
             $ignoreNull = $filter->getConfig()->getOption('filter_ignore_null');
 
             if ($ignoreNull && $filter->isEmpty()) {
@@ -22,11 +25,17 @@ class Filters
             $field = $filter->getConfig()->getOption('filter_field');
 
             if (null === $alias) {
-                $alias = $qb->getRootAliases()[0];
+                $alias = $rootAlias;
             }
 
             if (null === $field) {
                 $field = $name;
+            }
+
+            if ($filter->getConfig()->getOption('filter_compound')) {
+                $this->apply($qb, $filter, $alias);
+
+                continue;
             }
 
             if ($callback === false) {
