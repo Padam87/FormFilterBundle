@@ -27,6 +27,9 @@ class FilterExtension extends AbstractTypeExtension
 
         $resolver->setDefault('filter_ignore_null', true);
         $resolver->setAllowedTypes('filter_ignore_null', ['bool']);
+
+        $resolver->setDefault('filter_compound', false);
+        $resolver->setAllowedTypes('filter_compound', ['bool']);
     }
 
     /**
