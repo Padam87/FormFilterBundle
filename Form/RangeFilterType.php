@@ -13,7 +13,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class RangeFilterType extends AbstractType
 {
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add(
@@ -29,7 +29,7 @@ class RangeFilterType extends AbstractType
         ;
     }
 
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver
             ->setDefaults(
@@ -43,7 +43,7 @@ class RangeFilterType extends AbstractType
                     'to_field_options' => [],
                     'to_field_expr' => 'lte',
                     'filter' => function (Options $options) {
-                        return function(QueryBuilder $qb, $alias, $value, $field) use ($options) {
+                        return function(QueryBuilder $qb, string $alias, array $value, string $field) use ($options): void {
                             if ($value['from'] != null) {
                                 $parameter = $field . '_from';
 

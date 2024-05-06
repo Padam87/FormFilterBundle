@@ -7,7 +7,7 @@ use Symfony\Component\Form\FormInterface;
 
 class Filters
 {
-    public function apply(QueryBuilder $qb, FormInterface $filters, ?string $rootAlias = null)
+    public function apply(QueryBuilder $qb, FormInterface $filters, ?string $rootAlias = null): void
     {
         $rootAlias = $rootAlias ?? $qb->getRootAliases()[0];
 
@@ -47,16 +47,11 @@ class Filters
             }
 
             if ($callback === true) {
-                switch ($expr) {
-                    case 'like':
-                        $value = '%' . $filter->getData() . '%';
-                        break;
-                    default:
-                        $value = $filter->getData();
-                }
-
-                $param = str_replace('.', '__', $alias) . '_' . $field;
-
+                $value = match ($expr) {
+                    'like' => '%' . $filter->getData() . '%',
+                    default => $filter->getData(),
+                };
+                $param = str_replace('.', '__', (string) $alias) . '_' . $field;
                 $qb
                     ->andWhere($qb->expr()->$expr($alias . '.' . $field, ':' . $param))
                     ->setParameter($param, $value)

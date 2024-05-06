@@ -11,7 +11,7 @@ class FilterExtension extends AbstractTypeExtension
     /**
      * {@inheritdoc}
      */
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefault('filter', true);
         $resolver->setAllowedTypes('filter', ['bool', 'callable']);
