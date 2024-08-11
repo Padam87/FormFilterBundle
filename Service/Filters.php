@@ -12,7 +12,6 @@ class Filters
         $rootAlias = $rootAlias ?? $qb->getRootAliases()[0];
 
         foreach ($filters->all() as $name => $filter) {
-
             $ignoreNull = $filter->getConfig()->getOption('filter_ignore_null');
 
             if ($ignoreNull && $filter->isEmpty()) {
@@ -51,7 +50,7 @@ class Filters
                     'like' => '%' . $filter->getData() . '%',
                     default => $filter->getData(),
                 };
-                $param = str_replace('.', '__', (string) $alias) . '_' . $field;
+                $param = str_replace('.', '__', (string) $alias) . '_' . str_replace('.', '_', (string) $field);
                 $qb
                     ->andWhere($qb->expr()->$expr($alias . '.' . $field, ':' . $param))
                     ->setParameter($param, $value)
