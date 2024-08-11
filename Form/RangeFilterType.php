@@ -45,7 +45,7 @@ class RangeFilterType extends AbstractType
                     'filter' => function (Options $options) {
                         return function(QueryBuilder $qb, string $alias, array $value, string $field) use ($options): void {
                             if ($value['from'] != null) {
-                                $parameter = $field . '_from';
+                                $parameter = str_replace('.', '_', $field) . '_from';
 
                                 $qb
                                     ->andWhere($qb->expr()->{$options['from_field_expr']}($alias . '.' . $field, ':' . $parameter))
@@ -54,7 +54,7 @@ class RangeFilterType extends AbstractType
                             }
                             
                             if ($value['to'] != null) {
-                                $parameter = $field . '_to';
+                                $parameter = str_replace('.', '_', $field) . '_to';
 
                                 $qb
                                     ->andWhere($qb->expr()->{$options['to_field_expr']}($alias . '.' . $field, ':' . $parameter))
