@@ -4,8 +4,6 @@ namespace Padam87\FormFilterBundle\Form;
 
 use Doctrine\ORM\QueryBuilder;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\Options;
@@ -42,26 +40,24 @@ class RangeFilterType extends AbstractType
                     'to_field_type' => TextType::class,
                     'to_field_options' => [],
                     'to_field_expr' => 'lte',
-                    'filter' => function (Options $options) {
-                        return function(QueryBuilder $qb, string $alias, array $value, string $field) use ($options): void {
-                            if ($value['from'] != null) {
-                                $parameter = $this->getParameterName($alias, $field, 'from');
+                    'filter' => fn(Options $options) => function(QueryBuilder $qb, string $alias, array $value, string $field) use ($options): void {
+                        if ($value['from'] != null) {
+                            $parameter = $this->getParameterName($alias, $field, 'from');
 
-                                $qb
-                                    ->andWhere($qb->expr()->{$options['from_field_expr']}($alias . '.' . $field, ':' . $parameter))
-                                    ->setParameter($parameter, $value['from'])
-                                ;
-                            }
-                            
-                            if ($value['to'] != null) {
-                                $parameter = $this->getParameterName($alias, $field, 'to');
+                            $qb
+                                ->andWhere($qb->expr()->{$options['from_field_expr']}($alias . '.' . $field, ':' . $parameter))
+                                ->setParameter($parameter, $value['from'])
+                            ;
+                        }
+                        
+                        if ($value['to'] != null) {
+                            $parameter = $this->getParameterName($alias, $field, 'to');
 
-                                $qb
-                                    ->andWhere($qb->expr()->{$options['to_field_expr']}($alias . '.' . $field, ':' . $parameter))
-                                    ->setParameter($parameter, $value['to'])
-                                ;
-                            }
-                        };
+                            $qb
+                                ->andWhere($qb->expr()->{$options['to_field_expr']}($alias . '.' . $field, ':' . $parameter))
+                                ->setParameter($parameter, $value['to'])
+                            ;
+                        }
                     },
                 ]
             )

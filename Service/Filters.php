@@ -9,7 +9,7 @@ class Filters
 {
     public function apply(QueryBuilder $qb, FormInterface $filters, ?string $rootAlias = null): void
     {
-        $rootAlias = $rootAlias ?? $qb->getRootAliases()[0];
+        $rootAlias ??= $qb->getRootAliases()[0];
 
         foreach ($filters->all() as $name => $filter) {
             $ignoreNull = $filter->getConfig()->getOption('filter_ignore_null');

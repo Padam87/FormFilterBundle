@@ -19,12 +19,10 @@
     "psr-4": {"Padam87\\FormFilterBundle\\": ""}
   },
   "require": {
-    "php": "^8.0",
-    "symfony/config": "^6.0 || ^7.0",
-    "symfony/dependency-injection": "^6.0 || ^7.0",
-    "symfony/form": "^6.0 || ^7.0",
-    "doctrine/orm": "^2.3 || ^3.0"
-  },
-  "suggest": {
+    "php": "^8.4",
+    "symfony/config": "^6.0 || ^7.0 || ^8.0",
+    "symfony/dependency-injection": "^6.0 || ^7.0 || ^8.0",
+    "symfony/form": "^6.0 || ^7.0 || ^8.0",
+    "doctrine/orm": "^2.3 || ^3.0 || ^8.0"
   }
 }
